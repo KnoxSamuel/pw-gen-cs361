@@ -13,14 +13,6 @@ const { generatePassword } = require('./PasswordGen')
 
 app.use(express.json());
 
-app.use(function (req, res, next) {
-    console.log("== Request received")
-    console.log("  - METHOD:", req.method)
-    console.log("  - URL:", req.url)
-    console.log("  - HEADERS:", req.headers)
-    next()
-});
-
 
 
 // default endpoint - password gen
