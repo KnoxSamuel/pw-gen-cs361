@@ -13,6 +13,15 @@ const { generatePassword } = require('./PasswordGen')
 
 app.use(express.json());
 
+app.use(function (req, res, next) {
+    console.log("== Request received")
+    console.log("  - METHOD:", req.method)
+    console.log("  - URL:", req.url)
+    console.log("  - HEADERS:", req.headers)
+    next()
+});
+
+
 
 // default endpoint - password gen
 app.get('/', function (req, res, next) {
@@ -33,7 +42,7 @@ app.get('/:pwlen', function (req, res, next) {
         res.status(200).json({pw})
     } else {
         res.status(404).send({
-            err: "Password length: " + req.originalUrl + " is out-of-bounds (1-64 inclusive)"
+            err: "Password length is out-of-bounds (1-64 inclusive): " + req.originalUrl
         });
     };
 });
