@@ -26,7 +26,8 @@ app.use(function (req, res, next) {
 app.get('/', function (req, res, next) {
 
     function getRandPw(len){
-        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        
+        var charset = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
         var randomness = '';
 
         for (var i = 0; i < len; ++i) {
@@ -47,7 +48,8 @@ app.get('/:pwlen', function (req, res, next) {
     console.log("  - req.params:", req.params);
 
     function getRandPw(len){
-        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        var charset = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
         var randomness = '';
 
         for (var i = 0; i < len; ++i) {
@@ -59,7 +61,7 @@ app.get('/:pwlen', function (req, res, next) {
     var pwlen = parseInt(req.params.pwlen);
     var pw = getRandPw(pwlen);
 
-    if (0 < pwlen < 65) {
+    if (pwlen < 65 || pwlen > 0) {
         res.status(200).json(pw)
     } else {
         res.status(404).send({
