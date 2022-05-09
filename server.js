@@ -61,7 +61,7 @@ app.get('/:pwlen', function (req, res, next) {
     var pwlen = parseInt(req.params.pwlen);
     var pw = getRandPw(pwlen);
 
-    if (pwlen < 65 || pwlen > 0) {
+    if ( (pwlen > 0) && (pwlen < 65) ) {
         res.status(200).json(pw)
     } else {
         res.status(404).send({
