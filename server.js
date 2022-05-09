@@ -55,3 +55,9 @@ app.use('*', function (req, res, next) {
         err: "This URL was not recognized: " + req.originalUrl
     })
 });
+
+
+
+app.listen(port, function () {
+    console.log("== Server is listening on port:", port)
+});
