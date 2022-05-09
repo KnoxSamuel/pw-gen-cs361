@@ -30,7 +30,7 @@ app.get('/', function (req, res, next) {
         var randomness = '';
 
         for (var i = 0; i < len; ++i) {
-            randomness += charset.charAt(Math.random() * charset.length());
+            randomness += charset.charAt(Math.random() * charset.length);
         };
         return randomness;
     };
@@ -51,7 +51,7 @@ app.get('/:pwlen', function (req, res, next) {
         var randomness = '';
 
         for (var i = 0; i < len; ++i) {
-            randomness += charset.charAt(Math.random() * charset.length());
+            randomness += charset.charAt(Math.random() * charset.length);
         };
         return randomness;
     };
