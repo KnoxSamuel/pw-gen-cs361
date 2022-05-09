@@ -38,7 +38,7 @@ app.get('/', function (req, res, next) {
 
     var pw = getRandPw(10); // default 10 chars, no pw len specified in url
     
-    res.status(200).json(pw);
+    res.status(200).json({pw});
 });
 
 
@@ -62,7 +62,7 @@ app.get('/:pwlen', function (req, res, next) {
     var pw = getRandPw(pwlen);
 
     if ( (pwlen > 0) && (pwlen < 65) ) {
-        res.status(200).json(pw)
+        res.status(200).json({pw})
     } else {
         res.status(404).send({
             err: "This URL was not recognized: " + req.originalUrl
