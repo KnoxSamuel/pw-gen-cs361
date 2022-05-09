@@ -9,6 +9,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 80
 
+const { generatePassword } = require('../PasswordGen')
+
 app.use(express.json());
 
 
@@ -25,7 +27,7 @@ app.use(function (req, res, next) {
 // default endpoint - password gen
 app.get('/', function (req, res, next) {
 
-    function getRandPw(len){
+    /*function getRandPw(len){
         
         var charset = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
         var randomness = '';
@@ -34,10 +36,9 @@ app.get('/', function (req, res, next) {
             randomness += charset.charAt(Math.random() * charset.length);
         };
         return randomness;
-    };
+    };*/
 
-    var pw = getRandPw(10); // default 10 chars, no pw len specified in url
-    
+    const pw = generatePassword(10); // default 10 chars, no pw len specified in url
     res.status(200).json({pw});
 });
 
@@ -45,21 +46,9 @@ app.get('/', function (req, res, next) {
 
 // return longer passwords (accepted 1-64)
 app.get('/:pwlen', function (req, res, next) {
-    console.log("  - req.params:", req.params);
 
-    function getRandPw(len){
-
-        var charset = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
-        var randomness = '';
-
-        for (var i = 0; i < len; ++i) {
-            randomness += charset.charAt(Math.random() * charset.length);
-        };
-        return randomness;
-    };
-
-    var pwlen = parseInt(req.params.pwlen);
-    var pw = getRandPw(pwlen);
+    const pwlen = parseInt(req.params.pwlen);
+    const pw = generatePassword(pwlen);
 
     if ( (pwlen > 0) && (pwlen < 65) ) {
         res.status(200).json({pw})
