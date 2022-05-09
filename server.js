@@ -9,7 +9,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 80
 
-const { generatePassword } = require('../PasswordGen')
+const { generatePassword } = require('./PasswordGen')
 
 app.use(express.json());
 
